@@ -1,0 +1,44 @@
+.inputTextTitle {
+    font-size: 16px !important;
+    font-weight: 400;
+}
+
+.formCard {
+    border: 1px solid rgb(241, 202, 202);
+    border-radius: 27px;
+    box-sizing: content-box;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+}
+
+.cardButn {
+    background-color: #3f51b5 !important;
+}
+
+.loginCol {
+    margin-left: 300px;
+    margin-top: 70px;
+}
+
+@media screen and (max-width: 480px) {
+    .loginCol {
+        margin-left: 0px;
+        margin-top: 70px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .loginCol {
+        margin-left: 300px;
+        margin-top: 70px;
+    }
+}
+
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+
+@media screen and (max-width: 600px) {
+    .loginCol {
+        margin-left: 0px;
+        margin-top: 70px;
+    }
+}

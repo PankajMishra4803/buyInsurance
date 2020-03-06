@@ -1,0 +1,108 @@
+<div class="sidenav">
+    <a href="#" [routerLink]="['/insureyou/home']" routerLinkActive="active">Home</a>
+    <a href="#" [routerLink]="['/insureyou/buypolicy']" routerLinkActive="active">Buy Insurance</a>
+    <!-- <a href="#" [routerLink]="['/insureyou/paypremium']" routerLinkActive="active">Pay Premium</a>
+    <a href="#" [routerLink]="['/insureyou/changepaymentmode']" title="Change Payment Mode" routerLinkActive="active">Change</a> -->
+</div>
+<div class="main">
+    <mat-toolbar color="primary">
+        <div style="float:left; width: 50%;">{{titleOfPageBuyInsurance}} </div>
+        <div style="float:right; width: 50%;">
+            <p style="width: 37%;float:left;margin-left: 220px;">Welcome To: {{loggedinUser}}</p>
+            <div style="float:right; width: 2%; ">
+                <a href="javascript:void(0)" (click)="logOut()"><span><i class="fa fa-sign-out iconStyle " aria-hidden="true " ></i></span></a>
+            </div>
+        </div>
+    </mat-toolbar>
+    <div class="row">
+        <div class="col-md-6 max-auto formCard" style="display: flex;margin-top: 43px;flex-direction: column;margin-left: 280px;margin-bottom: 43px;padding: 20px;">
+            <form [formGroup]="buyInsuranceForm" (ngSubmit)="onSubmit(buyInsuranceForm)">
+                <!---------------------First Grop------------------------------------------------------->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputName" class="inputTextTitle">Name</label>
+                        <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputNominee" class="inputTextTitle">Nominee</label>
+                        <input type="text" class="form-control" id="inputNominee" placeholder="Nominee" formControlName="nominee" required>
+                    </div>
+                </div>
+                <!-------------------Second Group------------------------------------------------------->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputDOB" class="inputTextTitle">Date Of Birth</label>
+                        <input type="date" class="form-control" id="inputDOB" placeholder="Date Of Birth" formControlName="dateOfBirth" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputRelationship" class="inputTextTitle">Relationship:</label>
+                        <select id="inputRelationship" class="form-control" formControlName="relationship" required>
+                      <option>Spouse</option>
+                      <option>Father</option>
+                      <option>Mother</option>
+                      <option>Friend</option>
+                  </select>
+                    </div>
+                </div>
+                <!-------------------Third Group------------------------------------------------------->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputDOB" class="inputTextTitle">Gender:</label>
+                        <div class="form-check-inline custom-control custom-radio">
+                            <input type="radio" class="custom-control-input form-check-input" id="radioMale" value="Male" formControlName="gender">
+                            <label class="custom-control-label inputTextTitle form-check-label" for="radioMale">Male</label>
+                        </div>
+                        <div class="form-check-inline custom-control custom-radio">
+                            <input type="radio" class="custom-control-input form-check-input" id="radioFemale" value="Female" formControlName="gender">
+                            <label class="custom-control-label inputTextTitle form-check-label" for="radioFemale">Female</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputTextareaAddress" class="inputTextTitle">Address:</label>
+                        <textarea class="form-control" id="inputTextareaAddress" rows="3" formControlName="textareaAddress" required></textarea>
+                    </div>
+                </div>
+                <!-------------------Fourth Group------------------------------------------------------->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputTenure" class="inputTextTitle">Tenure:</label>
+                        <select id="inputTenure" class="form-control" formControlName="inputTenure" required (change)="changetenure(buyInsuranceForm.value.modeOfPayment,buyInsuranceForm.value.inputTenure,buyInsuranceForm.value.policyName)">
+                      <option>5</option>
+                      <option>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                      <option>25</option>
+                </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputMOP" class="inputTextTitle">Mode of payment:</label>
+                        <select id="inputMOP" class="form-control" formControlName="modeOfPayment" required (change)="changemodeOfPayment(buyInsuranceForm.value.modeOfPayment,buyInsuranceForm.value.inputTenure,buyInsuranceForm.value.policyName)">
+                      <option>Monthly</option>
+                      <option>Quterly</option>
+                      <option>Yearly</option>
+                  </select>
+                    </div>
+                </div>
+                <!-------------------Fifth Group------------------------------------------------------->
+                <div class=" form-row ">
+                    <div class="form-group col-md-6 ">
+                        <label for="inputPolicyName " class="inputTextTitle ">Policy Name:</label>
+                        <select id="inputPolicyName " class="form-control " formControlName="policyName" required (change)="changePolicy(buyInsuranceForm.value.modeOfPayment,buyInsuranceForm.value.inputTenure,buyInsuranceForm.value.policyName)" title="{{buyInsuranceForm.value.modeOfPayment && buyInsuranceForm.value.inputTenure ? '':'Plese select mode of payment and tenure'}}">
+                      <option></option>
+                      <option *ngIf="buyInsuranceForm.value.modeOfPayment && buyInsuranceForm.value.inputTenure">POL1</option>
+                      <option *ngIf="buyInsuranceForm.value.modeOfPayment && buyInsuranceForm.value.inputTenure">POL2</option>
+                      <option *ngIf="buyInsuranceForm.value.modeOfPayment && buyInsuranceForm.value.inputTenure">POL3</option>
+                    </select>
+                    </div>
+                    <div class=" form-group col-md-6 ">
+                        <label for="inputPremiumAmount" class="inputTextTitle">Premium Amount</label>
+                        <input type="text" class="form-control" formControlName="premiumAmount" id="inputPremiumAmount" value={{premiumAmountValue}} placeholder="Name" readonly>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center ">
+                    <button id="singlebutton " name="singlebutton " class="btn btn-primary cardButn" [disabled]="!buyInsuranceForm.valid ">Buy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

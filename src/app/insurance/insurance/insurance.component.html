@@ -1,0 +1,46 @@
+<div class="sidenav">
+    <a href="javascript:void(0)" [routerLink]="['/insureyou/home']" routerLinkActive="active">Home</a>
+    <a href="javascript:void(0)" [routerLink]="['/insureyou/buypolicy']" routerLinkActive="active">Buy Insurance</a>
+    <!-- <a href="javascript:void(0)" [routerLink]="['/insureyou/paypremium']" routerLinkActive="active">Pay Premium</a>
+    <a href="javascript:void(0)" [routerLink]="['/insureyou/changepaymentmode']" routerLinkActive="active" title="Change Payment Mode">Change</a> -->
+</div>
+<div class="main">
+    <mat-toolbar color="primary">
+        <div style="float:left; width: 50%;">{{titleOfPage}} </div>
+        <div style="float:right; width: 50%;">
+            <p style="width: 37%;float:left;margin-left: 220px;">Welcome To: {{userloing}}</p>
+            <div style="float:right; width: 2%; ">
+                <a href="javascript:void(0)" (click)="logOut()"><span><i class="fa fa-sign-out iconStyle " aria-hidden="true " ></i></span></a>
+            </div>
+        </div>
+
+    </mat-toolbar>
+    <div>
+        <table *ngIf="userInsurances.length > 0">
+            <tr>
+                <th>Policy Number</th>
+                <th>Mode Of Payment</th>
+                <th>Premium</th>
+                <th>Next Premium</th>
+                <th>Action</th>
+            </tr>
+            <tr *ngFor="let userInsurance of userInsurances">
+                <td> {{userInsurance.policyNumber}}</td>
+                <td> {{userInsurance.modeOfPayment}}</td>
+                <td> {{userInsurance.premiumAmount}}</td>
+                <td> {{userInsurance.createDate}}</td>
+                <td> <a [routerLink]="['/insureyou/paypremium',[userInsurance.premiumAmount, userInsurance.policyNumber]]" class="btnHyperLink">Pay</a><a [routerLink]="['/insureyou/changepaymentmode',[userInsurance.policyNumber, userInsurance.modeOfPayment]]"
+                        class="btnHyperLink">Change</a> </td>
+            </tr>
+
+        </table>
+
+    </div>
+    <div class="buypolicy" *ngIf="userInsurances.length == 0">
+        <div>
+            <p>Sorry, you don’t have any insurance. Please go to Buy insurance page and buy Insurance.</p>
+        </div>
+        <div><a [routerLink]="['/insureyou/buypolicy']" class="btnHyperLink">Buy policy</a></div>
+    </div>
+
+</div>

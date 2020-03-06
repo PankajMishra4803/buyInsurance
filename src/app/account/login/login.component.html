@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-6 loginCol">
+        <div class="card text-center">
+            <div class="card-header text-white" style="background-color: #3f51b5;">
+                Log In
+            </div>
+            <div class="card-body">
+                <form class="formPayPremium" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label for="inputUserName" class="col-sm-3 col-form-label inputTextTitle">User Name:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="inputUserName" placeholder="User Name / EmailID" formControlName="userName" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-3 col-form-label inputTextTitle">Password:</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="password" formControlName="password" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary cardButn" [disabled]="!loginForm.valid">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

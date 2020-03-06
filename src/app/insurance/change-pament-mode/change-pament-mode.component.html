@@ -1,0 +1,53 @@
+<div class="sidenav">
+    <a href="#" [routerLink]="['/insureyou/home']" routerLinkActive="active">Home</a>
+    <a href="#" [routerLink]="['/insureyou/buypolicy']" routerLinkActive="active">Buy Insurance</a>
+    <!-- <a href="#" [routerLink]="['/insureyou/paypremium']" routerLinkActive="active">Pay Premium</a>
+    <a href="#" [routerLink]="['/insureyou/changepaymentmode']" routerLinkActive="active" title="Change Payment Mode">Change</a> -->
+</div>
+<div class="main">
+    <mat-toolbar color="primary">
+        <div style="float:left; width: 50%;">{{titleOfPageChangeOfMode}} </div>
+        <div style="float:right; width: 50%;">
+            <p style="width: 37%;float:left;margin-left: 220px;">Welcome To: {{loggedinUser}}</p>
+            <div style="float:right; width: 2%; ">
+                <a href="javascript:void(0)" (click)="logOut()"><span><i class="fa fa-sign-out iconStyle " aria-hidden="true " ></i></span></a>
+            </div>
+        </div>
+    </mat-toolbar>
+    <div class="row">
+        <div class="col-md-4">
+            <a [routerLink]="['/insureyou/home']" class="btnHyperLink">Back</a>
+        </div>
+        <div class="col-md-6" style="margin-left: 280px; margin-top:40px">
+            <form class="formPayPremium formCard" [formGroup]="changePaymentForm" (ngSubmit)="onSubmit(changePaymentForm)">
+                <div class="form-group row">
+                    <label for="inputPolicyNumber" class="col-sm-3 col-form-label inputTextTitle">Policy Number:</label>
+                    <div class="col-sm-7">
+                        <input type="text" readonly class="form-control-plaintext" id="inputPolicyNumber" value="{{policyNumber}}" name="policyNumber">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPremiumAmount" class="col-sm-4 col-form-label inputTextTitle">Mode Of Payment:</label>
+                    <div class="col-sm-7" style="display: flex; flex-direction: column;align-items: left;">
+                        <div class="col-sm-3 custom-control custom-radio">
+                            <input type="radio" class="custom-control-input form-check-input" id="radioMonthly" value="Monthly" [checked]="Monthly" formControlName="modeOfPayment">
+                            <label class="custom-control-label inputTextTitle form-check-label" for="radioMonthly">Monthly</label>
+                        </div>
+                        <div class="col-sm-3 custom-control custom-radio">
+                            <input type="radio" class="custom-control-input form-check-input" id="radioQaterly" value="Qaterly" [checked]="Qaterly" formControlName="modeOfPayment">
+                            <label class="custom-control-label inputTextTitle form-check-label" for="radioQaterly">Qaterly</label>
+                        </div>
+                        <div class="col-sm-3 custom-control custom-radio">
+                            <input type="radio" class="custom-control-input form-check-input" id="radioYearly" value="Yearly" [checked]="Yearly" formControlName="modeOfPayment">
+                            <label class="custom-control-label inputTextTitle form-check-label" for="radioYearly">Yearly</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 text-center">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-primary cardButn">Pay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

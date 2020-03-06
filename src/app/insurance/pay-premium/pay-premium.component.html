@@ -1,0 +1,93 @@
+<div class="sidenav">
+    <a href="#" [routerLink]="['/insureyou/home']" routerLinkActive="active">Home</a>
+    <a href="#" [routerLink]="['/insureyou/buypolicy']" routerLinkActive="active">Buy Insurance</a>
+    <!-- <a href="#" [routerLink]="['/insureyou/paypremium']" routerLinkActive="active">Pay Premium</a>
+    <a href="#" [routerLink]="['/insureyou/changepaymentmode']" routerLinkActive="active" title="Change Payment Mode">Change</a> -->
+</div>
+<div class="main">
+    <mat-toolbar color="primary">
+        <div style="float:left; width: 50%;">{{titleOfPage}} </div>
+        <div style="float:right; width: 50%;">
+            <p style="width: 37%;float:left;margin-left: 220px;">Welcome To: {{loggedinUser}}</p>
+            <div style="float:right; width: 2%; ">
+                <a href="javascript:void(0)" (click)="logOut()"><span><i class="fa fa-sign-out iconStyle " aria-hidden="true " ></i></span></a>
+            </div>
+        </div>
+    </mat-toolbar>
+    <div class="row">
+        <div class="col-md-4">
+            <a [routerLink]="['/insureyou/home']" class="btnHyperLink">Back</a>
+        </div>
+        <div class="col-md-6" style="margin-left: 280px; margin-top:40px">
+            <form class="formPayPremium formCard" [formGroup]="payPremiumForm" (ngSubmit)="onSubmit()">
+                <div class="form-group row" *ngIf="policyNumber">
+                    <label class="col-sm-4 col-form-label inputTextTitle">Policy Number:</label>
+                    <label class="col-sm-4 col-form-label inputTextTitle">{{policyNumber}}</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label inputTextTitle">Premium Amount:</label>
+                    <label class="col-sm-4 col-form-label inputTextTitle">{{priumAmount}}</label>
+                </div>
+                <div class="form-group row">
+                    <label for="inputCardNumber" class="col-sm-4 col-form-label inputTextTitle">Card Number:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputCardNumber" placeholder="4854-7857-8547-8541" formControlName="cardNumber" (keypress)="checkNumberOnly($event)" required>
+                        <div *ngIf="cardNumber.invalid && cardNumber.dirty" class="alert alert-danger" style="font-size:13px">
+                            Invalid Card Number
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputDateOfExpiry" class="col-sm-4 col-form-label inputTextTitle">Date Of Expriry:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputDateOfExpiry" placeholder=" MM / YY " formControlName="cardExpiryDate" required>
+                        <div *ngIf="cardExpiryDate.invalid && cardExpiryDate.dirty" class="alert alert-danger" style="font-size:13px">
+                            Invalid Month and year
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputCVV" class="col-sm-4 col-form-label inputTextTitle">CVV:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputCVV" placeholder="388" formControlName="cardCVVNumber" (keypress)="checkNumberOnly($event)" required>
+                        <div *ngIf="cardCVVNumber.invalid && cardCVVNumber.dirty" class="alert alert-danger" style="font-size:13px">
+                            Invalid CVV Number
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputCardHolderName" class="col-sm-4 col-form-label inputTextTitle">Name:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="inputCardHolderName" placeholder="Card Holder Name" formControlName="cardHolderName" required>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-primary cardButn" [disabled]="!payPremiumForm.valid">Pay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="modal" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="" (click)="hide()"><span>×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="thank-you-pop">
+                            <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+                            <h1>Thank You!</h1>
+                            <h3 class="cupon-pop">Your new Policy Number: <span>{{newPolicyNumber}}</span></h3>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
